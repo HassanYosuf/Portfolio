@@ -48,7 +48,7 @@ export function Hero() {
           variants={itemVariants}
           className="text-2xl md:text-3xl text-gray-700 font-light"
         >
-          BACKEND ENGINEER
+          BACKEND DEVELOPER
         </motion.p>
 
         <motion.p
