@@ -1,6 +1,6 @@
 export const portfolioData = {
   name: "Hassan Yosuf",
-  title: "BACKEND ENGINEER",
+  title: "BACKEND DEVELOPER",
   shortBio: "Building scalable backend systems and robust APIs that power modern applications. Microservices architecture, cloud-native development, Spring Boot, and enterprise-grade infrastructure.",
   
   skills: {
