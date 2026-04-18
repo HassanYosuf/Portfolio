@@ -9,6 +9,13 @@
   cursor: none !important;
 }
 
+@media (pointer: coarse) {
+  * {
+    cursor: auto !important;
+  }
+}
+
+
 html {
   scroll-behavior: smooth;
 }

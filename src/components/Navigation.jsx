@@ -1,6 +1,9 @@
-import { motion } from 'framer-motion';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export function Navigation() {
+  const [open, setOpen] = useState(false);
+
   const navItems = [
     { label: 'Work', href: '#work' },
     { label: 'Experience', href: '#experience' },
@@ -26,7 +29,8 @@ export function Navigation() {
           HY
         </motion.a>
 
-        <div className="flex gap-8">
+        {/* Desktop nav */}
+        <div className="hidden md:flex gap-8">
           {navItems.map((item) => (
             <motion.a
               key={item.label}
@@ -38,7 +42,44 @@ export function Navigation() {
             </motion.a>
           ))}
         </div>
+
+        {/* Hamburger button */}
+        <button
+          onClick={() => setOpen((o) => !o)}
+          className="md:hidden flex flex-col justify-center items-center w-8 h-8 gap-1.5"
+          aria-label="Toggle menu"
+        >
+          <span className={`block h-0.5 w-6 bg-black transition-transform duration-300 ${open ? 'rotate-45 translate-y-2' : ''}`} />
+          <span className={`block h-0.5 w-6 bg-black transition-opacity duration-300 ${open ? 'opacity-0' : ''}`} />
+          <span className={`block h-0.5 w-6 bg-black transition-transform duration-300 ${open ? '-rotate-45 -translate-y-2' : ''}`} />
+        </button>
       </div>
+
+      {/* Mobile menu */}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.25 }}
+            className="md:hidden overflow-hidden bg-white border-t border-gray-100"
+          >
+            <div className="flex flex-col px-6 py-4 gap-4">
+              {navItems.map((item) => (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  onClick={() => setOpen(false)}
+                  className="text-sm font-medium text-gray-700 hover:text-black transition-colors"
+                >
+                  {item.label}
+                </a>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.nav>
   );
 }

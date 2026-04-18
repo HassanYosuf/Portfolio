@@ -1,11 +1,15 @@
 import { useEffect, useRef } from 'react';
 
+const isTouch = typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches;
+
 export function CustomCursor() {
   const cursorRef = useRef(null);
   const pos = useRef({ x: -100, y: -100 });
   const raf = useRef(null);
 
   useEffect(() => {
+    if (isTouch) return;
+
     const onMouseMove = (e) => {
       pos.current = { x: e.clientX, y: e.clientY };
     };
@@ -25,6 +29,8 @@ export function CustomCursor() {
       cancelAnimationFrame(raf.current);
     };
   }, []);
+
+  if (isTouch) return null;
 
   return (
     <div
