@@ -1,21 +1,21 @@
 export const portfolioData = {
   name: "Hassan Yosuf",
-  title: "BACKEND DEVELOPER",
+  title: "BACKEND ENGINEER",
   shortBio: "Building scalable backend systems and robust APIs that power modern applications. Microservices architecture, cloud-native development, Spring Boot, and enterprise-grade infrastructure.",
   
   skills: {
-    languages: ["Python", "Java", "SQL", "JavaScript", "XML/JSON"],
-    frameworks: ["Spring Boot", "Node.js", "J2EE", "REST APIs"],
-    architectures: ["Microservices Architecture", "MVC Architecture", "OOPS", "Design Patterns"],
-    dataEngineering: ["ETL/ELT", "Data Pipelines", "Snowpark", "Pandas", "dbt", "Data Modeling", "Data Quality"],
-    dataTools: ["Snowflake", "PostgreSQL", "MySQL", "Oracle", "BigQuery", "HVR", "Informatica (IICS)", "Fivetran"],
-    orchestration: ["Apache Airflow", "Control-M", "Workflow Orchestration"],
-    cloudDevOps: ["AWS", "GCP", "Docker", "CI/CD Pipeline", "Linux", "Git"],
+    languages: ["Python", "Java", "SQL", "JavaScript", "XML/JSON", "PySpark"],
+    frameworks: ["Spring Boot", "Apache Kafka", "Redis", "Node.js", "J2EE", "REST APIs", "WebSocket/STOMP", "Maven"],
+    architectures: ["Microservices Architecture", "MVC Architecture", "OOPS", "Design Patterns", "API Design", "Event-Driven Architecture"],
+    dataEngineering: ["ETL/ELT", "Data Pipelines", "Snowpark", "Pandas", "Data Modeling", "Data Quality", "Data Governance"],
+    dataTools: ["Snowflake", "PostgreSQL", "MySQL", "Oracle", "MongoDB", "BigQuery", "HVR", "Informatica (IICS)"],
+    orchestration: ["Control-M", "Workflow Orchestration"],
+    cloudDevOps: ["AWS (Certified)", "GCP (Certified)", "Snowflake (Certified)", "Docker", "CI/CD Pipeline", "Linux", "Git"],
     certifications: ["AWS Certified Cloud Practitioner", "Google Cloud Platform (Associate Cloud Engineer)", "Snowflake SnowPro Certification"],
-    visualization: ["Tableau", "Power BI", "Looker Studio"],
-    tools: ["Maven", "JUnit", "JIRA", "Confluence", "REST APIs"],
-    aiExploring: ["AI Agents", "RAG Workflows"],
-    concepts: ["Data Structures & Algorithms", "Design Patterns", "SDLC", "Agile", "TDD", "API Design"]
+    visualization: ["Tableau", "Power BI"],
+    tools: ["Maven", "JUnit", "JIRA", "Confluence", "Cursor", "Fireblocks"],
+    aiExploring: ["LLM APIs (Claude, LLaMA)", "RAG Workflows", "Prompt Engineering", "AI Agents", "OpenText"],
+    concepts: ["Data Structures & Algorithms", "Design Patterns", "SDLC", "Agile", "TDD (JUnit)", "JWT", "OAuth2", "Data Governance"]
   },
 
   whatMovesMe: {
@@ -24,7 +24,7 @@ export const portfolioData = {
     read: ["The Pragmatic Programmer", "Clean Code"],
     wear: "Minimalist Tech Fashion",
     city: "Bengaluru, India",
-    now: "Building data infrastructure. Learning in public."
+    now: "Building scalable backend systems. Shipping production code."
   },
 
   projects: [
@@ -84,10 +84,14 @@ export const portfolioData = {
       company: "Quantiphi Analytics Solution Pvt. Ltd.",
       roles: [
         { title: "Senior Data Engineer", period: "Dec 2022 – Present" },
-        { title: "Backend Developer", period: "Dec 2022 – Present" },
+        { title: "Backend Engineer", period: "Dec 2022 – Present" },
       ],
       location: "Bangalore, India",
       bullets: [
+        {
+          label: "Real Estate Tokenization Platform",
+          detail: "Designed and developed a cloud-based real estate tokenization platform on GCP enabling fractional property investment through Bitcoin. Built 4 core microservices — User Service (auth & user management), Asset Service (token valuation & tracking), Ternas Service (property listing), and Finance Service (payout logic) — deployed on GCP Compute Engine for scalability and high availability.",
+        },
         {
           label: "Microservices Architecture (Java)",
           detail: "Architected and maintained robust Java Spring Boot microservices. Applied design patterns to decouple services, improving maintainability and allowing for independent scaling of financial transaction modules.",
@@ -97,16 +101,24 @@ export const portfolioData = {
           detail: "Implemented backend workflows to manage user lifecycles, transactions, asset/token valuations, and automated payouts, integrating Fireblocks for secure Bitcoin transactions. Tuned performance through concurrency improvements and query profiling.",
         },
         {
-          label: "SDLC & Automation",
-          detail: "Streamlined the software delivery process by implementing CI/CD pipelines. Managed complex branching strategies for version control (Git) to ensure code stability across multiple release environments.",
+          label: "Cloud Infrastructure (GCP)",
+          detail: "Worked on data persistence using Cloud SQL for relational data and GCS for property documents and transaction logs; supported BigQuery integration for analytical queries — contributing to transparent tokenization and transaction handling at scale.",
+        },
+        {
+          label: "Service Integration",
+          detail: "Integrated AI-powered speech-to-text and DLP APIs to automate PII redaction workflows, reducing manual compliance overhead and enhancing data security in production.",
         },
         {
           label: "Scalable System Engineering (Python/Snowflake)",
           detail: "Designed and developed production-grade data processing modules using Python and Snowflake. Optimized ingestion logic from 5+ distributed sources to process 200,000+ records in under 15 minutes.",
         },
         {
-          label: "Service Integration",
-          detail: "Integrated AI-powered speech-to-text and DLP APIs to automate PII redaction workflows, reducing manual compliance overhead and enhancing data security in production.",
+          label: "GenAI & LLM Integration",
+          detail: "Built RAG-based experiments integrating LLM APIs (Anthropic Claude, LLaMA) — exploring retrieval-augmented generation pipelines, prompt engineering, and LLM-powered workflow automation for internal tooling use cases.",
+        },
+        {
+          label: "SDLC & Automation",
+          detail: "Streamlined the software delivery process by implementing CI/CD pipelines. Managed complex branching strategies for version control (Git) to ensure code stability across multiple release environments.",
         },
         {
           label: "Production Operations",
@@ -158,9 +170,9 @@ export const portfolioData = {
       note: "for now"
     },
     working: {
-      title: "Senior Data Engineer",
+      title: "Backend Engineer",
       company: "Quantiphi Analytics Pvt Ltd",
-      note: "building tomorrow's data infrastructure"
+      note: "building scalable backend systems"
     }
   },
 
@@ -178,10 +190,18 @@ export const portfolioData = {
   articles: [
     {
       id: 1,
+      title: "LLaMA 3.3 AI Assistant to My Spring Boot WebSocket App",
+      description: "How to integrate a conversational AI model into a real-time messaging application — intercepting @ai-prefixed messages through a dedicated service layer connected to the Groq API, keeping the human-to-human chat pipeline untouched.",
+      tags: ["AI", "LLM", "Spring Boot", "WebSocket"],
+      date: "May 11, 2025",
+      url: "https://dev.to/hassanyosuf/llama-33-ai-assistant-to-my-spring-boot-websocket-app-hbo",
+    },
+    {
+      id: 2,
       title: "MVC - Model View Controller",
       description: "Understanding the Model-View-Controller architectural pattern and how it separates concerns in application development for better maintainability and scalability.",
       tags: ["Architecture", "Design Patterns", "Backend", "MVC"],
-      date: "Published on Dev.to",
+      date: "May 5, 2022",
       url: "https://dev.to/hassanyosuf/mvc-model-view-controller-55hk",
     },
   ]
