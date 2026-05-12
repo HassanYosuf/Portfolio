@@ -40,7 +40,7 @@ export const portfolioData = {
       id: 2,
       title: "ChatUp",
       description: "A modern chat application with responsive design. Built with clean CSS and JavaScript for real-time messaging experience.",
-      tags: ["React", "CSS", "JavaScript", "Frontend"],
+      tags: ["Spring Boot", "WebSocket", "LLaMA 3.3", "Groq API", "Docker"],
       year: 2025,
       link: "https://github.com/HassanYosuf/ChatUp",
     },
