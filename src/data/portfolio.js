@@ -5,15 +5,15 @@ export const portfolioData = {
   
   skills: {
     languages: ["Python", "Java", "SQL", "JavaScript", "XML/JSON", "PySpark"],
-    frameworks: ["Spring Boot", "Apache Kafka", "Redis", "Node.js", "J2EE", "REST APIs", "WebSocket/STOMP", "Maven"],
+    frameworks: ["Spring Boot", "Spring Security", "Spring Data JPA/Hibernate", "Apache Kafka", "Redis", "Node.js", "J2EE", "REST APIs", "WebSocket/STOMP", "Maven", "API Gateway", "Multithreading", "Concurrent Batch Processing"],
     architectures: ["Microservices Architecture", "MVC Architecture", "OOPS", "Design Patterns", "API Design", "Event-Driven Architecture"],
     dataEngineering: ["ETL/ELT", "Data Pipelines", "Snowpark", "Pandas", "Data Modeling", "Data Quality", "Data Governance"],
-    dataTools: ["Snowflake", "PostgreSQL", "MySQL", "Oracle", "MongoDB", "BigQuery", "HVR", "Informatica (IICS)"],
+    dataTools: ["Snowflake", "PostgreSQL", "MySQL", "Oracle", "MongoDB", "BigQuery", "Cassandra (familiar)", "HVR", "Informatica (IICS)"],
     orchestration: ["Control-M", "Workflow Orchestration"],
-    cloudDevOps: ["AWS (Certified)", "GCP (Certified)", "Snowflake (Certified)", "Docker", "CI/CD Pipeline", "Linux", "Git"],
+    cloudDevOps: ["AWS (Certified)", "GCP (Certified)", "Snowflake (Certified)", "Docker", "Kubernetes", "CI/CD Pipeline", "Linux", "Git"],
     certifications: ["AWS Certified Cloud Practitioner", "Google Cloud Platform (Associate Cloud Engineer)", "Snowflake SnowPro Certification"],
     visualization: ["Tableau", "Power BI"],
-    tools: ["Maven", "JUnit", "JIRA", "Confluence", "Cursor", "Fireblocks"],
+    tools: ["Maven", "JUnit", "JIRA", "Confluence", "Claude", "Cursor", "Fireblocks"],
     aiExploring: ["LLM APIs (Claude, LLaMA)", "RAG Workflows", "Prompt Engineering", "AI Agents", "OpenText"],
     concepts: ["Data Structures & Algorithms", "Design Patterns", "SDLC", "Agile", "TDD (JUnit)", "JWT", "OAuth2", "Data Governance"]
   },
@@ -83,8 +83,8 @@ export const portfolioData = {
       id: 1,
       company: "Quantiphi Analytics Solution Pvt. Ltd.",
       roles: [
-        { title: "Senior Data Engineer", period: "Dec 2022 – Present" },
-        { title: "Backend Engineer", period: "Dec 2022 – Present" },
+        { title: "Senior Data Engineer / Backend Engineer", period: "Jan 2026 – Present" },
+        { title: "Framework Engineer / Backend Engineer", period: "Dec 2022 – Dec 2025" },
       ],
       location: "Bangalore, India",
       bullets: [
@@ -134,7 +134,7 @@ export const portfolioData = {
       id: 2,
       company: "Quantiphi Analytics Solution Pvt. Ltd.",
       roles: [
-        { title: "Data Engineer Intern", period: "Aug 2022 – Dec 2022" },
+        { title: "Framework Engineer Intern", period: "Aug 2022 – Dec 2022" },
       ],
       location: "Bangalore, India",
       bullets: [
@@ -178,7 +178,7 @@ export const portfolioData = {
 
   contact: {
     email: "hassanyosuf14@gmail.com",
-    resume: "/Hassan_Yosuf_Resume_Backend_Developer.pdf",
+    resume: "/Hassan_Yosuf_Resume_Backend_Engineer.pdf",
     links: [
       { title: "GitHub", url: "https://github.com/HassanYosuf" },
       { title: "LinkedIn", url: "https://www.linkedin.com/in/hassanyosuf/" },

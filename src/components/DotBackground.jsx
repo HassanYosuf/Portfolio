@@ -1,59 +1,114 @@
-import { useEffect, useRef, useMemo } from 'react';
+import { useEffect, useRef } from 'react';
 
-const DOT_COUNT = 80;
 const LAYERS = [
-  { speed: 0.012, blur: 0,   size: [2, 3],   opacity: [0.18, 0.28] },
-  { speed: 0.025, blur: 1.5, size: [3, 5],   opacity: [0.10, 0.18] },
-  { speed: 0.045, blur: 3,   size: [5, 9],   opacity: [0.05, 0.12] },
+  { count: 80, blur: 0,   sizeRange: [2, 3], opacityRange: [0.18, 0.28] },
+  { count: 50, blur: 1.5, sizeRange: [3, 5], opacityRange: [0.10, 0.18] },
+  { count: 30, blur: 3,   sizeRange: [5, 9], opacityRange: [0.05, 0.12] },
 ];
 
-function randomBetween(a, b) {
-  return a + Math.random() * (b - a);
+const HOVER_RADIUS = 80;
+const HOVER_NUDGE = 0.4;
+const SPRING_K = 0.02;
+const DAMPING = 0.85;
+const DRIFT_AMP = 0.5;
+
+function rand(a, b) { return a + Math.random() * (b - a); }
+
+function makeParticle(layer, W, H) {
+  const ox = rand(0.02, 0.98) * W;
+  const oy = rand(0.02, 0.98) * H;
+  return {
+    ox, oy, x: ox, y: oy, vx: 0, vy: 0,
+    size: rand(...layer.sizeRange),
+    opacity: rand(...layer.opacityRange),
+    freq: rand(0.0003, 0.0008),
+    phase: rand(0, Math.PI * 2),
+  };
 }
 
 export function DotBackground() {
-  const layerRefs = useRef([]);
-  const mouse = useRef({ x: 0, y: 0 });
+  const canvasRefs = useRef([]);
+  const mouse = useRef({ x: -9999, y: -9999 });
+  const particles = useRef([]);
   const raf = useRef(null);
 
-  const dots = useMemo(() => {
-    return LAYERS.map((layer) =>
-      Array.from({ length: DOT_COUNT }, () => ({
-        x: randomBetween(0, 100),
-        y: randomBetween(0, 100),
-        size: randomBetween(layer.size[0], layer.size[1]),
-        opacity: randomBetween(layer.opacity[0], layer.opacity[1]),
-      }))
-    );
-  }, []);
-
   useEffect(() => {
-    const handleMouseMove = (e) => {
-      // Normalize to [-1, 1] from center
-      mouse.current = {
-        x: (e.clientX / window.innerWidth - 0.5) * 2,
-        y: (e.clientY / window.innerHeight - 0.5) * 2,
-      };
-    };
+    const canvases = canvasRefs.current;
+    const ctxs = canvases.map(c => c?.getContext('2d'));
 
-    window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    function init() {
+      const W = window.innerWidth;
+      const H = window.innerHeight;
+      canvases.forEach(c => { if (c) { c.width = W; c.height = H; } });
+      particles.current = LAYERS.map(layer =>
+        Array.from({ length: layer.count }, () => makeParticle(layer, W, H))
+      );
+    }
+
+    init();
+
+    const onMouseMove = (e) => { mouse.current = { x: e.clientX, y: e.clientY }; };
+    const onMouseLeave = () => { mouse.current = { x: -9999, y: -9999 }; };
+    const onResize = init;
+
+    window.addEventListener('mousemove', onMouseMove, { passive: true });
+    document.addEventListener('mouseleave', onMouseLeave);
+    window.addEventListener('resize', onResize);
+
+    let t = 0;
 
     const animate = () => {
-      LAYERS.forEach((layer, i) => {
-        const el = layerRefs.current[i];
-        if (!el) return;
-        const dx = mouse.current.x * layer.speed * 100;
-        const dy = mouse.current.y * layer.speed * 100;
-        el.style.transform = `translate(${dx}px, ${dy}px)`;
+      t++;
+      const { x: mx, y: my } = mouse.current;
+
+      LAYERS.forEach((_, li) => {
+        const ctx = ctxs[li];
+        const canvas = canvases[li];
+        if (!ctx || !canvas) return;
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        particles.current[li]?.forEach(p => {
+          // ambient drift target
+          const tx = p.ox + Math.sin(t * p.freq + p.phase) * DRIFT_AMP;
+          const ty = p.oy + Math.cos(t * p.freq + p.phase + 1.3) * DRIFT_AMP;
+
+          // spring toward drift target
+          let fx = (tx - p.x) * SPRING_K;
+          let fy = (ty - p.y) * SPRING_K;
+
+          // slight push away from cursor when nearby
+          const dx = mx - p.x;
+          const dy = my - p.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < HOVER_RADIUS && dist > 0.1) {
+            const strength = (1 - dist / HOVER_RADIUS) * HOVER_NUDGE;
+            fx -= (dx / dist) * strength;
+            fy -= (dy / dist) * strength;
+          }
+
+          p.vx = (p.vx + fx) * DAMPING;
+          p.vy = (p.vy + fy) * DAMPING;
+          p.x += p.vx;
+          p.y += p.vy;
+
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size / 2, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(0,0,0,${p.opacity})`;
+          ctx.fill();
+        });
       });
+
       raf.current = requestAnimationFrame(animate);
     };
 
     raf.current = requestAnimationFrame(animate);
 
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
       cancelAnimationFrame(raf.current);
+      window.removeEventListener('mousemove', onMouseMove);
+      document.removeEventListener('mouseleave', onMouseLeave);
+      window.removeEventListener('resize', onResize);
     };
   }, []);
 
@@ -65,38 +120,19 @@ export function DotBackground() {
         inset: 0,
         zIndex: 0,
         pointerEvents: 'none',
-        overflow: 'hidden',
         backgroundColor: '#ffffff',
       }}
     >
       {LAYERS.map((layer, i) => (
-        <div
+        <canvas
           key={i}
-          ref={(el) => (layerRefs.current[i] = el)}
+          ref={el => (canvasRefs.current[i] = el)}
           style={{
             position: 'absolute',
-            inset: '-8%',
-            willChange: 'transform',
-            transition: 'transform 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+            inset: 0,
             filter: layer.blur > 0 ? `blur(${layer.blur}px)` : undefined,
           }}
-        >
-          {dots[i].map((dot, j) => (
-            <div
-              key={j}
-              style={{
-                position: 'absolute',
-                left: `${dot.x}%`,
-                top: `${dot.y}%`,
-                width: dot.size,
-                height: dot.size,
-                borderRadius: '50%',
-                backgroundColor: '#000',
-                opacity: dot.opacity,
-              }}
-            />
-          ))}
-        </div>
+        />
       ))}
     </div>
   );

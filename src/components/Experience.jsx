@@ -40,19 +40,16 @@ export function Experience({ experience }) {
               <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-2 mb-6 pb-6 border-b border-gray-200">
                 <div>
                   <h3 className="text-2xl font-bold">{job.company}</h3>
-                  <div className="mt-2 flex flex-wrap items-center gap-y-1">
-                    {job.roles.map((role, i) => (
-                      <span key={i} className="text-sm font-mono text-gray-600 flex items-center">
-                        {role.title}
-                        {i < job.roles.length - 1 && (
-                          <span className="mx-2 text-gray-300">/</span>
-                        )}
-                      </span>
-                    ))}
+                  <div className="mt-2">
+                    <span className="text-sm font-mono text-gray-600">{job.roles[0].title}</span>
                   </div>
                 </div>
                 <div className="text-right shrink-0">
-                  <span className="text-sm font-mono text-gray-500">{job.roles[0].period}</span>
+                  <span className="text-sm font-mono text-gray-500">
+                    {job.roles.length > 1
+                      ? `${job.roles[job.roles.length - 1].period.split(' – ')[0]} – ${job.roles[0].period.split(' – ')[1]}`
+                      : job.roles[0].period}
+                  </span>
                   <p className="text-sm text-gray-400 mt-0.5">{job.location}</p>
                 </div>
               </div>
