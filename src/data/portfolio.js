@@ -189,6 +189,14 @@ export const portfolioData = {
 
   articles: [
     {
+      id: 3,
+      title: "How to Keep Your Render Free-Tier App Alive (Without Paying for It)",
+      description: "Render's free tier spins down apps after 15 minutes of inactivity, causing slow cold starts. Three practical keep-alive solutions — from zero-code external services to GitHub Actions cron jobs — so your app stays responsive without upgrading to a paid plan.",
+      tags: ["Render", "Deployment", "DevOps", "GitHub Actions"],
+      date: "June 14, 2026",
+      url: "https://dev.to/hassanyosuf/how-to-keep-your-render-free-tier-app-alive-without-paying-for-it-o8e",
+    },
+    {
       id: 1,
       title: "LLaMA 3.3 AI Assistant to My Spring Boot WebSocket App",
       description: "How to integrate a conversational AI model into a real-time messaging application — intercepting @ai-prefixed messages through a dedicated service layer connected to the Groq API, keeping the human-to-human chat pipeline untouched.",
