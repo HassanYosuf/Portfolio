@@ -2,7 +2,16 @@ export const portfolioData = {
   name: "Hassan Yosuf",
   title: "BACKEND ENGINEER",
   shortBio: "Building scalable backend systems and robust APIs that power modern applications. Microservices architecture, cloud-native development, Spring Boot, and enterprise-grade infrastructure.",
-  
+
+  // Impact metrics — all sourced from real experience below.
+  // Verify / refine these numbers anytime; nothing here is invented beyond what the bullets state.
+  metrics: [
+    { value: "4+", unit: "yrs", label: "Backend engineering", note: "Java · Python · cloud-native" },
+    { value: "200K+", unit: "records", label: "Processed < 15 min", note: "5+ distributed sources" },
+    { value: "4", unit: "services", label: "Microservices owned", note: "Tokenization platform, GCP" },
+    { value: "3", unit: "certs", label: "Cloud certified", note: "AWS · GCP · Snowflake" },
+  ],
+
   skills: {
     languages: ["Python", "Java", "SQL", "JavaScript", "XML/JSON", "PySpark"],
     frameworks: ["Spring Boot", "Spring Security", "Spring Data JPA/Hibernate", "Apache Kafka", "Redis", "Node.js", "J2EE", "REST APIs", "WebSocket/STOMP", "Maven", "API Gateway", "Multithreading", "Concurrent Batch Processing"],
@@ -34,39 +43,43 @@ export const portfolioData = {
       description: "Backend assessment project showcasing Python development skills. Building scalable server-side components and API integration.",
       tags: ["Python", "Backend", "API"],
       year: 2026,
+      featured: true,
       link: "https://github.com/HassanYosuf/Ikelos-Backend-Assesment",
     },
     {
       id: 2,
       title: "ChatUp",
-      description: "A modern chat application with responsive design. Built with clean CSS and JavaScript for real-time messaging experience.",
+      description: "Real-time messaging app on Spring Boot + WebSocket/STOMP, with an @ai assistant powered by LLaMA 3.3 via the Groq API — intercepted in a dedicated service layer so human-to-human chat stays untouched. Containerized with Docker.",
       tags: ["Spring Boot", "WebSocket", "LLaMA 3.3", "Groq API", "Docker"],
       year: 2025,
+      featured: true,
       link: "https://github.com/HassanYosuf/ChatUp",
     },
     {
       id: 3,
+      title: "Framely",
+      // TODO(Hassan): repo is private / 404 — confirm what Framely actually does and update this line + tags.
+      description: "A product I vibe-coded end to end — shipping a polished, usable app fast with AI-assisted development. (Details to confirm.)",
+      tags: ["Vibe Coding", "Web App"],
+      year: 2026,
+      link: "https://github.com/HassanYosuf/Framely",
+    },
+    {
+      id: 4,
+      title: "Bachelor Meal Planner",
+      description: "Mobile-first meal planner with a Supabase backend, prep timers, and browser push notifications. Vibe-coded and shipped to production on Vercel.",
+      tags: ["JavaScript", "Supabase", "PWA", "Notifications"],
+      year: 2026,
+      demo: "https://bachelor-meal-planner.vercel.app/",
+      link: "https://github.com/HassanYosuf/bachelor-meal-planner",
+    },
+    {
+      id: 5,
       title: "Weather Application",
       description: "Weather forecasting app that fetches real-time data and displays weather information with an intuitive interface.",
       tags: ["React", "API", "Weather", "JavaScript"],
       year: 2025,
       link: "https://github.com/HassanYosuf/WeatherApp",
-    },
-    {
-      id: 4,
-      title: "Threading in Java",
-      description: "Comprehensive implementation of threading concepts in Java. Demonstrates multi-threaded programming with best practices.",
-      tags: ["Java", "Threading", "Concurrency"],
-      year: 2024,
-      link: "https://github.com/HassanYosuf/Threading-in-Java",
-    },
-    {
-      id: 5,
-      title: "Image Processor",
-      description: "Advanced image processing application with encryption support. Features XOR cipher GUI implementation with Java Swing.",
-      tags: ["Java", "Encryption", "GUI", "Swing"],
-      year: 2021,
-      link: "https://github.com/HassanYosuf/Image-Processor",
     },
     {
       id: 6,

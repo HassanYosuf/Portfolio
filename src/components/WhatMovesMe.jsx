@@ -4,31 +4,21 @@ function renderWithItalicParens(text) {
   const parts = text.split(/(\(.*?\))/g);
   return parts.map((part, i) =>
     /^\(.*\)$/.test(part)
-      ? <em key={i} className="not-italic italic text-gray-500">{part}</em>
+      ? <em key={i} className="italic text-ink-subtle">{part}</em>
       : part
   );
 }
 
+const container = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { staggerChildren: 0.08 } },
+};
+const item = {
+  hidden: { opacity: 0, y: 16 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+};
+
 export function WhatMovesMe({ data }) {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6 },
-    },
-  };
-
   const interests = [
     { label: 'SOUND', items: data.music },
     { label: 'INSTRUMENT', items: [data.instrument].flat() },
@@ -39,45 +29,44 @@ export function WhatMovesMe({ data }) {
   ];
 
   return (
-    <motion.section
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      transition={{ duration: 0.8 }}
-      viewport={{ once: true }}
-      className="min-h-screen py-20 px-6"
-    >
-      <div className="max-w-6xl mx-auto">
+    <section className="py-20 px-6">
+      <div className="max-w-5xl mx-auto">
+        <motion.p
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
+          viewport={{ once: true }}
+          className="section-label mb-4"
+        >
+          <span className="text-accent">//</span> off the clock
+        </motion.p>
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-5xl md:text-6xl font-bold mb-16"
+          className="section-title mb-12"
         >
-          What Moves Me
+          What moves me
         </motion.h2>
 
         <motion.div
-          variants={containerVariants}
+          variants={container}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12"
+          viewport={{ once: true, margin: '-60px' }}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-8 border-t border-line pt-10"
         >
           {interests.map((interest) => (
-            <motion.div
-              key={interest.label}
-              variants={itemVariants}
-              className="space-y-3"
-            >
-              <h3 className="text-sm font-mono font-semibold text-gray-600 tracking-widest uppercase">
+            <motion.div key={interest.label} variants={item} className="space-y-2">
+              <h3 className="font-mono text-xs font-semibold tracking-[0.18em] uppercase text-ink-subtle">
                 {interest.label}
               </h3>
-              <p className="text-lg leading-relaxed text-gray-800">
-                {interest.items.map((item, i) => (
+              <p className="text-lg leading-relaxed text-ink">
+                {interest.items.map((it, i) => (
                   <span key={i}>
-                    {i > 0 && ' · '}
-                    {renderWithItalicParens(item)}
+                    {i > 0 && <span className="text-ink-subtle"> · </span>}
+                    {renderWithItalicParens(it)}
                   </span>
                 ))}
               </p>
@@ -85,6 +74,6 @@ export function WhatMovesMe({ data }) {
           ))}
         </motion.div>
       </div>
-    </motion.section>
+    </section>
   );
 }

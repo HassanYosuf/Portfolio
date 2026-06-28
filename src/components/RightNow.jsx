@@ -1,25 +1,21 @@
 import { motion } from 'framer-motion';
+import { Music, BookOpen, Hammer, Footprints, MapPin, Briefcase } from 'lucide-react';
+
+const container = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { staggerChildren: 0.07 } },
+};
+const item = {
+  hidden: { opacity: 0, y: 18 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+};
+
+const ICONS = {
+  LISTENING: Music, READING: BookOpen, BUILDING: Hammer,
+  WEARING: Footprints, CITY: MapPin, WORKING: Briefcase,
+};
 
 export function RightNow({ data }) {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6 },
-    },
-  };
-
   const items = [
     { title: 'LISTENING', data: data.listening },
     { title: 'READING', data: data.reading },
@@ -30,66 +26,70 @@ export function RightNow({ data }) {
   ];
 
   return (
-    <motion.section
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      transition={{ duration: 0.8 }}
-      viewport={{ once: true }}
-      className="min-h-screen py-20 px-6"
-    >
-      <div className="max-w-6xl mx-auto">
+    <section id="status" className="py-24 px-6 scroll-mt-24">
+      <div className="max-w-5xl mx-auto">
+        <motion.p
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
+          viewport={{ once: true }}
+          className="section-label mb-4"
+        >
+          04 / Now
+        </motion.p>
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-5xl md:text-6xl font-bold mb-16"
+          className="section-title mb-3"
         >
-          Right Now
+          Right now
         </motion.h2>
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+          className="font-mono text-sm text-ink-subtle mb-12 flex items-center gap-2"
+        >
+          <span className="w-1.5 h-1.5 rounded-full bg-signal animate-pulse" /> status · live snapshot
+        </motion.p>
 
         <motion.div
-          variants={containerVariants}
+          variants={container}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12"
+          viewport={{ once: true, margin: '-60px' }}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
         >
-          {items.map((item) => (
-            <motion.div
-              key={item.title}
-              variants={itemVariants}
-              className="space-y-3"
-            >
-              <h3 className="text-sm font-mono font-semibold text-gray-600 tracking-widest uppercase">
-                {item.title}
-              </h3>
-              <div className="space-y-1">
-                {item.data.title && (
-                  <p className="text-lg font-semibold text-gray-900">
-                    {item.data.title}
-                  </p>
-                )}
-                {item.data.artist && (
-                  <p className="text-gray-700">{item.data.artist}</p>
-                )}
-                {item.data.author && (
-                  <p className="text-gray-700">{item.data.author}</p>
-                )}
-                {item.data.company && (
-                  <p className="text-gray-700">{item.data.company}</p>
-                )}
-                {item.data.place && (
-                  <p className="text-gray-700">{item.data.place}</p>
-                )}
-                {item.data.note && (
-                  <p className="text-sm text-gray-600 italic">{item.data.note}</p>
-                )}
-              </div>
-            </motion.div>
-          ))}
+          {items.map((it) => {
+            const Icon = ICONS[it.title];
+            return (
+              <motion.div
+                key={it.title}
+                variants={item}
+                className="card p-5 hover:border-line-strong transition-colors"
+              >
+                <div className="flex items-center gap-2 mb-3">
+                  {Icon && <Icon size={14} className="text-accent" />}
+                  <h3 className="font-mono text-xs font-semibold tracking-[0.18em] uppercase text-ink-subtle">
+                    {it.title}
+                  </h3>
+                </div>
+                <div className="space-y-0.5">
+                  {it.data.title && <p className="text-base font-semibold text-ink">{it.data.title}</p>}
+                  {it.data.artist && <p className="text-sm text-ink-muted">{it.data.artist}</p>}
+                  {it.data.author && <p className="text-sm text-ink-muted">{it.data.author}</p>}
+                  {it.data.company && <p className="text-sm text-ink-muted">{it.data.company}</p>}
+                  {it.data.place && <p className="text-sm text-ink-muted">{it.data.place}</p>}
+                  {it.data.note && <p className="text-sm text-ink-subtle italic mt-1">{it.data.note}</p>}
+                </div>
+              </motion.div>
+            );
+          })}
         </motion.div>
       </div>
-    </motion.section>
+    </section>
   );
 }

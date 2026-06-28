@@ -1,117 +1,96 @@
 import { motion } from 'framer-motion';
-import { Mail, Github, Linkedin, Twitter, Download } from 'lucide-react';
+import { Mail, Github, Linkedin, Twitter, FileDown, ArrowUpRight } from 'lucide-react';
+
+const iconMap = { GitHub: Github, LinkedIn: Linkedin, Twitter: Twitter };
+
+const container = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { staggerChildren: 0.08 } },
+};
+const item = {
+  hidden: { opacity: 0, y: 18 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+};
 
 export function Footer({ contact }) {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6 },
-    },
-  };
-
-  const iconMap = {
-    GitHub: Github,
-    LinkedIn: Linkedin,
-    Twitter: Twitter,
-  };
-
   return (
-    <motion.footer
-      id="contact"
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      transition={{ duration: 0.8 }}
-      viewport={{ once: true }}
-      className="py-20 px-6 bg-black text-white"
-    >
-      <div className="max-w-4xl mx-auto text-center">
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="space-y-12"
-        >
+    <footer id="contact" className="scroll-mt-24 mt-12 px-4 pb-4">
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: '-80px' }}
+        variants={container}
+        className="relative max-w-6xl mx-auto overflow-hidden rounded-3xl bg-ink px-6 py-20 sm:py-28 text-paper"
+      >
+        {/* subtle grid texture */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 opacity-[0.07]"
+          style={{
+            backgroundImage: 'radial-gradient(rgba(255,255,255,0.6) 1px, transparent 1px)',
+            backgroundSize: '24px 24px',
+          }}
+        />
+        <div className="relative max-w-3xl mx-auto text-center">
+          <motion.p variants={item} className="font-mono text-xs tracking-[0.2em] uppercase text-ink-subtle mb-6">
+            06 / Contact
+          </motion.p>
           <motion.h2
-            variants={itemVariants}
-            className="text-4xl md:text-5xl font-bold"
+            variants={item}
+            className="font-display text-4xl sm:text-5xl md:text-6xl font-bold leading-[1.05] tracking-tight"
           >
-            Let's Make Something<br />That Means Something.
+            Let&apos;s build something<br />
+            <span className="text-ink-subtle">that scales.</span>
           </motion.h2>
 
-          <motion.div
-            variants={itemVariants}
-            className="flex flex-col items-center gap-6"
-          >
-            <motion.a
+          <motion.div variants={item} className="mt-10 flex flex-col items-center gap-5">
+            <a
               href={`mailto:${contact.email}`}
-              className="flex items-center gap-2 text-lg hover:text-gray-300 transition-colors"
-              whileHover={{ x: 5 }}
+              className="group inline-flex items-center gap-2 font-mono text-base sm:text-lg text-paper hover:text-accent transition-colors"
             >
-              <Mail size={20} />
+              <Mail size={18} />
               {contact.email}
-            </motion.a>
+              <ArrowUpRight size={16} className="opacity-0 group-hover:opacity-100 transition-opacity" />
+            </a>
             {contact.resume && (
-              <motion.a
+              <a
                 href={contact.resume}
                 download
-                className="flex items-center gap-2 px-6 py-3 border border-white text-base font-semibold hover:bg-white hover:text-black transition-colors rounded-lg"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                className="inline-flex items-center gap-2 rounded-full bg-paper px-6 py-3 text-sm font-semibold text-ink hover:bg-accent hover:text-paper transition-colors"
               >
-                <Download size={18} />
-                Download Resume
-              </motion.a>
+                <FileDown size={17} />
+                Download résumé
+              </a>
             )}
           </motion.div>
 
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="flex justify-center gap-8 flex-wrap"
-          >
+          <motion.div variants={item} className="mt-12 flex justify-center flex-wrap gap-6">
             {contact.links.map((link) => {
-              const IconComponent = iconMap[link.title] || null;
+              const Icon = iconMap[link.title];
               return (
-                <motion.a
+                <a
                   key={link.title}
                   href={link.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  variants={itemVariants}
-                  className="text-sm font-medium hover:text-gray-300 transition-colors flex items-center gap-2"
-                  whileHover={{ y: -3 }}
+                  className="inline-flex items-center gap-2 text-sm font-medium text-ink-subtle hover:text-paper transition-colors"
                 >
-                  {IconComponent && <IconComponent size={16} />}
+                  {Icon && <Icon size={16} />}
                   {link.title}
-                </motion.a>
+                </a>
               );
             })}
           </motion.div>
 
           <motion.div
-            variants={itemVariants}
-            className="text-sm text-gray-400 pt-8 border-t border-gray-800"
+            variants={item}
+            className="mt-14 pt-8 border-t border-white/10 font-mono text-xs text-ink-subtle"
           >
             <p>© 2026 Hassan Yosuf</p>
-            <p className="mt-2">BUILT RAW · SHIPPED WITH INTENT</p>
+            <p className="mt-1.5">built &amp; shipped with intent · bengaluru, in</p>
           </motion.div>
-        </motion.div>
-      </div>
-    </motion.footer>
+        </div>
+      </motion.div>
+    </footer>
   );
 }

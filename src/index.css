@@ -2,71 +2,93 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --accent: #2563EB;
+  --paper: #FAFAFB;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  cursor: none !important;
 }
-
-@media (pointer: coarse) {
-  * {
-    cursor: auto !important;
-  }
-}
-
 
 html {
   scroll-behavior: smooth;
+  /* offset for the sticky nav when jumping to #anchors */
+  scroll-padding-top: 6rem;
 }
 
 body {
   font-family: 'Inter', sans-serif;
-  background-color: #ffffff;
-  color: #000000;
+  background-color: var(--paper);
+  color: #0F172A;
   line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
-/* Typography */
+::selection {
+  background: #2563EB;
+  color: #ffffff;
+}
+
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Space Grotesk', sans-serif;
   font-weight: 700;
+  letter-spacing: -0.02em;
 }
 
 code, pre {
   font-family: 'JetBrains Mono', monospace;
 }
 
-/* Animations */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
+/* ---- Reusable primitives ---- */
+@layer components {
+  .section-label {
+    @apply inline-flex items-center gap-2 font-mono text-xs tracking-[0.2em] uppercase text-ink-subtle;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  .section-title {
+    @apply font-display text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-ink;
+  }
+  .tag {
+    @apply px-2.5 py-1 text-xs font-mono rounded-md border border-line bg-surface text-ink-muted
+           transition-colors;
+  }
+  .card {
+    @apply rounded-2xl border border-line bg-surface shadow-card;
   }
 }
 
-.fade-in-up {
-  animation: fadeInUp 0.6s ease-out;
+/* ---- Blueprint dot-grid backdrop (static, no JS) ---- */
+.backdrop-grid {
+  background-color: var(--paper);
+  background-image:
+    radial-gradient(circle at 50% -10%, rgba(37, 99, 235, 0.07), transparent 55%),
+    radial-gradient(rgba(15, 23, 42, 0.14) 1px, transparent 1px);
+  background-size: 100% 100%, 26px 26px;
+  background-position: 0 0, 0 0;
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0.55));
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0.55));
 }
 
-/* Scrollbar */
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
-
+/* ---- Scrollbar ---- */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 5px;
+  background: #cbd5e1;
+  border-radius: 99px;
+  border: 2px solid var(--paper);
 }
+::-webkit-scrollbar-thumb:hover { background: #2563EB; }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
+/* ---- Respect reduced motion ---- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }
