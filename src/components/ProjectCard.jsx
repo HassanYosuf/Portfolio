@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { ArrowUpRight, Star, Github } from 'lucide-react';
+import { useTilt } from '../hooks/useTilt';
 
 const item = {
   hidden: { opacity: 0, y: 20 },
@@ -9,13 +10,24 @@ const item = {
 export function ProjectCard({ project, span, large }) {
   const primary = project.demo || project.link;
   const hasDemo = Boolean(project.demo);
+  const { ref, style, glareStyle, handlers } = useTilt({ max: 6 });
 
   return (
     <motion.div
+      ref={ref}
       variants={item}
       whileHover={{ y: -4 }}
-      className={`group relative flex flex-col card p-6 sm:p-7 hover:shadow-card-hover hover:border-line-strong transition-all overflow-hidden ${span}`}
+      style={style}
+      {...handlers}
+      className={`group relative flex flex-col card p-6 sm:p-7 hover:shadow-card-hover hover:border-line-strong transition-all overflow-hidden [transform-style:preserve-3d] ${span}`}
     >
+      {/* pointer-following glare */}
+      <motion.span
+        aria-hidden="true"
+        style={glareStyle}
+        className="pointer-events-none absolute inset-0 rounded-2xl"
+      />
+
       {/* corner watermark id */}
       <span className="pointer-events-none absolute -top-3 -right-1 font-display text-7xl font-bold text-paper-2 select-none leading-none">
         {String(project.id).padStart(2, '0')}
