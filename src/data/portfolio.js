@@ -185,7 +185,7 @@ export const portfolioData = {
     working: {
       title: "Backend Engineer",
       company: "Quantiphi Analytics Pvt Ltd",
-      note: "building scalable backend systems"
+      note: "serving notice — open to new opportunities"
     }
   },
 

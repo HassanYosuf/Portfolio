@@ -23,7 +23,7 @@ export function Hero({ name, title, bio, resume, onOpenPalette }) {
         <motion.div variants={item} className="flex flex-wrap items-center gap-3 mb-8">
           <span className="inline-flex items-center gap-2 rounded-full border border-line bg-surface/70 px-3 py-1 font-mono text-xs text-ink-muted">
             <span className="w-1.5 h-1.5 rounded-full bg-signal animate-pulse" />
-            available for backend / platform roles
+            open to new roles · available Sep 2026
           </span>
           <span className="font-mono text-xs text-ink-subtle">~/bengaluru · IN</span>
         </motion.div>
