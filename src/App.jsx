@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { MotionConfig } from 'framer-motion';
 import { Navigation } from './components/Navigation';
 import { Hero } from './components/Hero';
 import { Metrics } from './components/Metrics';
@@ -17,14 +18,15 @@ export default function App() {
   const [paletteOpen, setPaletteOpen] = useState(false);
 
   return (
-    <>
+    <MotionConfig reducedMotion="user">
+      <a href="#main" className="skip-link">Skip to content</a>
       <Backdrop />
       <CommandPalette open={paletteOpen} setOpen={setPaletteOpen} contact={portfolioData.contact} />
 
       <div className="overflow-x-hidden relative z-[1]">
         <Navigation onOpenPalette={() => setPaletteOpen(true)} />
 
-        <main>
+        <main id="main">
           <Hero
             name={portfolioData.name}
             title={portfolioData.title}
@@ -43,6 +45,6 @@ export default function App() {
 
         <Footer contact={portfolioData.contact} />
       </div>
-    </>
+    </MotionConfig>
   );
 }

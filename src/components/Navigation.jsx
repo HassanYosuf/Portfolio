@@ -23,6 +23,20 @@ export function Navigation({ onOpenPalette }) {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  // Close the mobile menu on Escape or when the viewport grows to desktop.
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e) => e.key === 'Escape' && setOpen(false);
+    const mq = window.matchMedia('(min-width: 768px)');
+    const onChange = (e) => e.matches && setOpen(false);
+    window.addEventListener('keydown', onKey);
+    mq.addEventListener('change', onChange);
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      mq.removeEventListener('change', onChange);
+    };
+  }, [open]);
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -50,7 +64,11 @@ export function Navigation({ onOpenPalette }) {
     >
       <div className="max-w-6xl mx-auto px-6 py-3.5 flex justify-between items-center">
         <div className="flex items-center gap-3">
-          <a href="#" className="font-display text-lg font-bold tracking-tight text-ink">
+          <a
+            href="#main"
+            aria-label="Back to top"
+            className="font-display text-lg font-bold tracking-tight text-ink rounded"
+          >
             HY<span className="text-accent">.</span>
           </a>
           <div className="hidden md:flex items-center gap-1.5 pl-3 border-l border-line">
@@ -92,13 +110,14 @@ export function Navigation({ onOpenPalette }) {
         {/* Hamburger */}
         <button
           onClick={() => setOpen((o) => !o)}
-          className="md:hidden flex flex-col justify-center items-center w-8 h-8 gap-1.5"
-          aria-label="Toggle menu"
+          className="md:hidden flex flex-col justify-center items-center w-8 h-8 gap-1.5 rounded"
+          aria-label={open ? 'Close menu' : 'Open menu'}
           aria-expanded={open}
+          aria-controls="mobile-menu"
         >
-          <span className={`block h-0.5 w-6 bg-ink transition-transform duration-300 ${open ? 'rotate-45 translate-y-2' : ''}`} />
-          <span className={`block h-0.5 w-6 bg-ink transition-opacity duration-300 ${open ? 'opacity-0' : ''}`} />
-          <span className={`block h-0.5 w-6 bg-ink transition-transform duration-300 ${open ? '-rotate-45 -translate-y-2' : ''}`} />
+          <span aria-hidden="true" className={`block h-0.5 w-6 bg-ink transition-transform duration-300 ${open ? 'rotate-45 translate-y-2' : ''}`} />
+          <span aria-hidden="true" className={`block h-0.5 w-6 bg-ink transition-opacity duration-300 ${open ? 'opacity-0' : ''}`} />
+          <span aria-hidden="true" className={`block h-0.5 w-6 bg-ink transition-transform duration-300 ${open ? '-rotate-45 -translate-y-2' : ''}`} />
         </button>
       </div>
 
@@ -110,6 +129,7 @@ export function Navigation({ onOpenPalette }) {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.25 }}
+            id="mobile-menu"
             className="md:hidden overflow-hidden bg-paper border-t border-line"
           >
             <div className="flex flex-col px-6 py-4 gap-1">

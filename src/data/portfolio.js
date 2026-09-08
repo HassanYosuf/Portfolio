@@ -39,12 +39,13 @@ export const portfolioData = {
   projects: [
     {
       id: 1,
-      title: "Resumable Agentic Simulation Pipeline",
-      description: "Backend assessment project showcasing Python development skills. Building scalable server-side components and API integration.",
-      tags: ["Python", "Backend", "API"],
+      title: "Citadex",
+      description: "SEO/AEO diagnostic platform that scores any URL across 58 signals — metadata, schema, citability, AI-crawler access, Core Web Vitals — and returns prioritized fixes. Also bundles a site or GitHub repo's front-end into one prompt-ready payload for LLM-assisted UI regeneration, with optional in-app rebuilds via the Claude API. Fully REST, with auth, rate limiting, and webhooks.",
+      tags: ["SEO/AEO", "REST API", "Claude API", "Core Web Vitals", "Vercel"],
       year: 2026,
       featured: true,
-      link: "https://github.com/HassanYosuf/Ikelos-Backend-Assesment",
+      demo: "https://citadex-c.vercel.app/",
+      link: "https://github.com/HassanYosuf/Citadex",
     },
     {
       id: 2,
@@ -53,10 +54,20 @@ export const portfolioData = {
       tags: ["Spring Boot", "WebSocket", "LLaMA 3.3", "Groq API", "Docker"],
       year: 2025,
       featured: true,
+      demo: "https://chatup-jg85.onrender.com/index.html",
       link: "https://github.com/HassanYosuf/ChatUp",
     },
     {
       id: 3,
+      title: "Resumable Agentic Simulation Pipeline",
+      description: "Backend assessment project showcasing Python development skills. Building scalable server-side components and API integration.",
+      tags: ["Python", "Backend", "API"],
+      year: 2026,
+      featured: true,
+      link: "https://github.com/HassanYosuf/Ikelos-Backend-Assesment",
+    },
+    {
+      id: 4,
       title: "Framely",
       // TODO(Hassan): repo is private / 404 — confirm what Framely actually does and update this line + tags.
       description: "A product I vibe-coded end to end — shipping a polished, usable app fast with AI-assisted development. (Details to confirm.)",
@@ -65,7 +76,7 @@ export const portfolioData = {
       link: "https://github.com/HassanYosuf/Framely",
     },
     {
-      id: 4,
+      id: 5,
       title: "Bachelor Meal Planner",
       description: "Mobile-first meal planner with a Supabase backend, prep timers, and browser push notifications. Vibe-coded and shipped to production on Vercel.",
       tags: ["JavaScript", "Supabase", "PWA", "Notifications"],
@@ -74,20 +85,12 @@ export const portfolioData = {
       link: "https://github.com/HassanYosuf/bachelor-meal-planner",
     },
     {
-      id: 5,
+      id: 6,
       title: "Weather Application",
       description: "Weather forecasting app that fetches real-time data and displays weather information with an intuitive interface.",
       tags: ["React", "API", "Weather", "JavaScript"],
       year: 2025,
       link: "https://github.com/HassanYosuf/WeatherApp",
-    },
-    {
-      id: 6,
-      title: "Tic-Tac-Toe Game",
-      description: "Interactive Tic-Tac-Toe game built with Java Swing. Features full game logic and graphical interface.",
-      tags: ["Java", "Swing", "GUI", "Game"],
-      year: 2020,
-      link: "https://github.com/HassanYosuf/Tic-Tac-Toe-using-Swing",
     },
   ],
 

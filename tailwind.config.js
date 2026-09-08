@@ -14,7 +14,8 @@ export default {
         // Ink — cool slate scale
         ink: '#0F172A',
         'ink-muted': '#475569',
-        'ink-subtle': '#94A3B8',
+        // Darkened from #94A3B8 so small text clears WCAG AA (4.5:1) on light surfaces
+        'ink-subtle': '#64748B',
         // Lines
         line: '#E7EAF0',
         'line-strong': '#D5DAE4',

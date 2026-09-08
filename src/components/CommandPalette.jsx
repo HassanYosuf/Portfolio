@@ -15,8 +15,10 @@ const ICONS = {
 export function CommandPalette({ open, setOpen, contact }) {
   const [query, setQuery] = useState('');
   const [active, setActive] = useState(0);
+  const [copied, setCopied] = useState(false);
   const inputRef = useRef(null);
   const listRef = useRef(null);
+  const triggerRef = useRef(null);
 
   const commands = useMemo(() => {
     const go = (id) => () => {
@@ -34,9 +36,19 @@ export function CommandPalette({ open, setOpen, contact }) {
       { id: 'github', label: 'Open GitHub', hint: 'external', run: () => window.open(links.GitHub, '_blank') },
       { id: 'linkedin', label: 'Open LinkedIn', hint: 'external', run: () => window.open(links.LinkedIn, '_blank') },
       { id: 'twitter', label: 'Open Twitter', hint: 'external', run: () => window.open(links.Twitter, '_blank') },
-      { id: 'contact-mail', label: 'Copy email', hint: contact.email, run: () => navigator.clipboard?.writeText(contact.email) },
+      {
+        id: 'contact-mail',
+        label: copied ? 'Email copied' : 'Copy email',
+        hint: contact.email,
+        keepOpen: true,
+        run: () => {
+          navigator.clipboard?.writeText(contact.email);
+          setCopied(true);
+          setTimeout(() => setCopied(false), 1600);
+        },
+      },
     ];
-  }, [contact]);
+  }, [contact, copied]);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -60,13 +72,23 @@ export function CommandPalette({ open, setOpen, contact }) {
 
   useEffect(() => {
     if (open) {
+      triggerRef.current = document.activeElement;
       setQuery('');
       setActive(0);
+      setCopied(false);
       setTimeout(() => inputRef.current?.focus(), 20);
+    } else if (triggerRef.current instanceof HTMLElement) {
+      // Return focus to whatever opened the palette
+      triggerRef.current.focus();
     }
   }, [open]);
 
   useEffect(() => { setActive(0); }, [query]);
+
+  // Keep the highlighted row visible as you arrow through the list
+  useEffect(() => {
+    listRef.current?.children[active]?.scrollIntoView({ block: 'nearest' });
+  }, [active]);
 
   const onInputKey = (e) => {
     if (e.key === 'ArrowDown') {
@@ -78,7 +100,7 @@ export function CommandPalette({ open, setOpen, contact }) {
     } else if (e.key === 'Enter') {
       e.preventDefault();
       const cmd = filtered[active];
-      if (cmd) { cmd.run(); setOpen(false); }
+      if (cmd) { cmd.run(); if (!cmd.keepOpen) setOpen(false); }
     }
   };
 
@@ -128,7 +150,7 @@ export function CommandPalette({ open, setOpen, contact }) {
                   <li key={cmd.id}>
                     <button
                       onMouseEnter={() => setActive(i)}
-                      onClick={() => { cmd.run(); setOpen(false); }}
+                      onClick={() => { cmd.run(); if (!cmd.keepOpen) setOpen(false); }}
                       className={`flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-left transition-colors ${
                         i === active ? 'bg-accent-soft text-accent-ink' : 'text-ink hover:bg-paper-2'
                       }`}

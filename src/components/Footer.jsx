@@ -32,7 +32,7 @@ export function Footer({ contact }) {
           }}
         />
         <div className="relative max-w-3xl mx-auto text-center">
-          <motion.p variants={item} className="font-mono text-xs tracking-[0.2em] uppercase text-ink-subtle mb-6">
+          <motion.p variants={item} className="font-mono text-xs tracking-[0.2em] uppercase text-white/55 mb-6">
             06 / Contact
           </motion.p>
           <motion.h2
@@ -40,7 +40,7 @@ export function Footer({ contact }) {
             className="font-display text-4xl sm:text-5xl md:text-6xl font-bold leading-[1.05] tracking-tight"
           >
             Let&apos;s build something<br />
-            <span className="text-ink-subtle">that scales.</span>
+            <span className="text-white/45">that scales.</span>
           </motion.h2>
 
           <motion.div variants={item} className="mt-10 flex flex-col items-center gap-5">
@@ -73,7 +73,7 @@ export function Footer({ contact }) {
                   href={link.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-sm font-medium text-ink-subtle hover:text-paper transition-colors"
+                  className="inline-flex items-center gap-2 text-sm font-medium text-white/65 hover:text-paper transition-colors"
                 >
                   {Icon && <Icon size={16} />}
                   {link.title}
@@ -84,7 +84,7 @@ export function Footer({ contact }) {
 
           <motion.div
             variants={item}
-            className="mt-14 pt-8 border-t border-white/10 font-mono text-xs text-ink-subtle"
+            className="mt-14 pt-8 border-t border-white/10 font-mono text-xs text-white/55"
           >
             <p>© 2026 Hassan Yosuf</p>
             <p className="mt-1.5">built &amp; shipped with intent · bengaluru, in</p>
