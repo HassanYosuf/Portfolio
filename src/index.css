@@ -15,8 +15,9 @@
 
 html {
   scroll-behavior: smooth;
-  /* offset for the sticky nav when jumping to #anchors */
-  scroll-padding-top: 6rem;
+  /* offset = sticky nav height, so a jumped-to section starts flush below the bar
+     and none of the previous section peeks through */
+  scroll-padding-top: 57px;
 }
 
 body {
@@ -47,6 +48,10 @@ button:not(:disabled),
 }
 
 /* ---- Skip link ---- */
+@media (min-width: 768px) {
+  html { scroll-padding-top: 61px; }
+}
+
 .skip-link {
   position: fixed;
   top: 0.75rem;

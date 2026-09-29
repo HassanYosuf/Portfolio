@@ -12,7 +12,7 @@ export function Experience({ experience }) {
       : job.roles[0].period;
 
   return (
-    <section id="experience" className="py-24 px-6 scroll-mt-24">
+    <section id="experience" className="py-16 sm:py-24 px-6">
       <div className="max-w-4xl mx-auto">
         <motion.p
           initial={{ opacity: 0, y: 10 }}
@@ -49,10 +49,14 @@ export function Experience({ experience }) {
                   <h3 className="text-xl sm:text-2xl font-bold text-ink">{job.company}</h3>
                   <div className="mt-3 space-y-1.5">
                     {job.roles.map((role) => (
-                      <div key={role.title} className="flex items-center gap-2">
-                        <span className="w-1.5 h-1.5 rounded-full bg-accent shrink-0" />
-                        <span className="text-sm text-ink-muted">{role.title}</span>
-                        <span className="font-mono text-xs text-ink-subtle">· {role.period}</span>
+                      <div key={role.title} className="flex items-baseline gap-2">
+                        <span className="w-1.5 h-1.5 rounded-full bg-accent shrink-0 -translate-y-0.5" />
+                        <div className="flex flex-col sm:flex-row sm:items-baseline sm:gap-2">
+                          <span className="text-sm text-ink-muted">{role.title}</span>
+                          {job.roles.length > 1 && (
+                            <span className="font-mono text-xs text-ink-subtle"><span className="hidden sm:inline">· </span>{role.period}</span>
+                          )}
+                        </div>
                       </div>
                     ))}
                   </div>

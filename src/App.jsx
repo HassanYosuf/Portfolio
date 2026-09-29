@@ -32,6 +32,8 @@ export default function App() {
             title={portfolioData.title}
             bio={portfolioData.shortBio}
             resume={portfolioData.contact.resume}
+            portrait={portfolioData.portrait}
+            portraitSketch={portfolioData.portraitSketch}
             onOpenPalette={() => setPaletteOpen(true)}
           />
           <Metrics metrics={portfolioData.metrics} />

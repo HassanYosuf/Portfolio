@@ -19,7 +19,7 @@ export function ProjectCard({ project, span, large }) {
       whileHover={{ y: -4 }}
       style={style}
       {...handlers}
-      className={`group relative flex flex-col card p-6 sm:p-7 hover:shadow-card-hover hover:border-line-strong transition-all overflow-hidden [transform-style:preserve-3d] ${span}`}
+      className={`group relative flex flex-col card p-6 sm:p-7 hover:shadow-card-hover hover:border-line-strong transition-all overflow-hidden ${span}`}
     >
       {/* pointer-following glare */}
       <motion.span
@@ -28,9 +28,11 @@ export function ProjectCard({ project, span, large }) {
         className="pointer-events-none absolute inset-0 rounded-2xl"
       />
 
-      {/* corner watermark id */}
-      <span className="pointer-events-none absolute -top-3 -right-1 font-display text-7xl font-bold text-paper-2 select-none leading-none">
-        {String(project.id).padStart(2, '0')}
+      {/* corner watermark id — own rounded clip layer, since the tilt transform stops the card's overflow-hidden from clipping to its corners */}
+      <span aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden rounded-2xl">
+        <span className="absolute -top-3 -right-1 font-display text-7xl font-bold text-paper-2 select-none leading-none">
+          {String(project.id).padStart(2, '0')}
+        </span>
       </span>
 
       <div className="relative flex items-center justify-between gap-3">

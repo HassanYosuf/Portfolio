@@ -25,7 +25,7 @@ function MetricTile({ m }) {
         style={glareStyle}
         className="pointer-events-none absolute inset-0"
       />
-      <div className="relative flex items-baseline gap-1.5" style={{ transform: 'translateZ(16px)' }}>
+      <div className="relative flex flex-wrap items-baseline gap-x-1.5" style={{ transform: 'translateZ(16px)' }}>
         <span className="font-display text-3xl sm:text-4xl font-bold text-ink tracking-tight">
           {m.value}
         </span>

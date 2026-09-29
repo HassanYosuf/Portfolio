@@ -1,6 +1,8 @@
 export const portfolioData = {
   name: "Hassan Yosuf",
   title: "BACKEND ENGINEER",
+  portrait: "/portrait.webp",
+  portraitSketch: "/portrait-sketch.webp",
   shortBio: "Building scalable backend systems and robust APIs that power modern applications. Microservices architecture, cloud-native development, Spring Boot, and enterprise-grade infrastructure.",
 
   // Impact metrics — all sourced from real experience below.
@@ -16,14 +18,14 @@ export const portfolioData = {
     languages: ["Python", "Java", "SQL", "JavaScript", "XML/JSON", "PySpark"],
     frameworks: ["Spring Boot", "Spring Security", "Spring Data JPA/Hibernate", "Apache Kafka", "Redis", "Node.js", "J2EE", "REST APIs", "WebSocket/STOMP", "Maven", "API Gateway", "Multithreading", "Concurrent Batch Processing"],
     architectures: ["Microservices Architecture", "MVC Architecture", "OOPS", "Design Patterns", "API Design", "Event-Driven Architecture"],
-    dataEngineering: ["ETL/ELT", "Data Pipelines", "Snowpark", "Pandas", "Data Modeling", "Data Quality", "Data Governance"],
-    dataTools: ["Snowflake", "PostgreSQL", "MySQL", "Oracle", "MongoDB", "BigQuery", "Cassandra (familiar)", "HVR", "Informatica (IICS)"],
-    orchestration: ["Control-M", "Workflow Orchestration"],
+    dataEngineering: ["ETL/ELT", "Data Pipelines", "Snowpark", "Pandas", "Data Modeling", "Star Schema", "Medallion Architecture", "Data Quality & Reconciliation", "Data Governance", "Databricks (learning)"],
+    dataTools: ["Snowflake", "PostgreSQL", "MySQL", "Oracle", "MongoDB", "BigQuery", "Vector DB", "Cassandra (familiar)", "HVR", "Informatica (IICS)", "Fivetran"],
+    orchestration: ["Airflow", "Control-M", "Workflow Orchestration"],
     cloudDevOps: ["AWS (Certified)", "GCP (Certified)", "Snowflake (Certified)", "Docker", "Kubernetes", "CI/CD Pipeline", "Linux", "Git"],
-    certifications: ["AWS Certified Cloud Practitioner", "Google Cloud Platform (Associate Cloud Engineer)", "Snowflake SnowPro Certification"],
-    visualization: ["Tableau", "Power BI"],
+    certifications: ["AWS Certified Cloud Practitioner", "Google Cloud Platform (Associate Cloud Engineer)", "Snowflake SnowPro Core Certification"],
+    visualization: ["Tableau", "Power BI", "Looker Studio"],
     tools: ["Maven", "JUnit", "JIRA", "Confluence", "Claude", "Cursor", "Fireblocks"],
-    aiExploring: ["LLM APIs (Claude, LLaMA)", "RAG Workflows", "Prompt Engineering", "AI Agents", "OpenText"],
+    aiExploring: ["LLM APIs (Claude, LLaMA, Groq)", "RAG Workflows", "Prompt Engineering", "AI Agents", "OpenText"],
     concepts: ["Data Structures & Algorithms", "Design Patterns", "SDLC", "Agile", "TDD (JUnit)", "JWT", "OAuth2", "Data Governance"]
   },
 
@@ -96,13 +98,26 @@ export const portfolioData = {
 
   experience: [
     {
+      id: 3,
+      company: "UsefulBI Corporation",
+      roles: [
+        { title: "Senior Software Engineer 1", period: "Sep 2026 – Present" },
+      ],
+      location: "Bengaluru, India",
+      bullets: [
+        {
+          label: "Databricks & AWS Exploration",
+          detail: "Actively exploring Databricks for large-scale data processing and lakehouse architecture, and expanding hands-on AWS data engineering capabilities across Glue, S3, and Redshift as part of onboarding into the data platform team.",
+        },
+      ],
+    },
+    {
       id: 1,
       company: "Quantiphi Analytics Solution Pvt. Ltd.",
       roles: [
-        { title: "Senior Data Engineer / Backend Engineer", period: "Jan 2026 – Present" },
-        { title: "Framework Engineer / Backend Engineer", period: "Dec 2022 – Dec 2025" },
+        { title: "Senior Data Engineer / Backend Engineer", period: "Jan 2026 – Sep 2026" },
       ],
-      location: "Bangalore, India",
+      location: "Bengaluru, India",
       bullets: [
         {
           label: "Real Estate Tokenization Platform",
@@ -110,7 +125,7 @@ export const portfolioData = {
         },
         {
           label: "Microservices Architecture (Java)",
-          detail: "Architected and maintained robust Java Spring Boot microservices. Applied design patterns to decouple services, improving maintainability and allowing for independent scaling of financial transaction modules.",
+          detail: "Architected and maintained robust Java Spring Boot microservices, using REST APIs for synchronous calls and Apache Kafka for asynchronous event-driven messaging. Applied design patterns to decouple services, improving maintainability and allowing for independent scaling of financial transaction modules.",
         },
         {
           label: "Secure Distributed Systems",
@@ -126,7 +141,19 @@ export const portfolioData = {
         },
         {
           label: "Scalable System Engineering (Python/Snowflake)",
-          detail: "Designed and developed production-grade data processing modules using Python and Snowflake. Optimized ingestion logic from 5+ distributed sources to process 200,000+ records in under 15 minutes.",
+          detail: "Designed and developed production-grade data processing modules using Python, Spark, and Snowflake. Optimized ingestion logic from 5+ distributed sources to process 200,000+ records in under 15 minutes.",
+        },
+        {
+          label: "EDW Decommission — On-Prem to Snowflake (Kemper Insurance)",
+          detail: "Independently designed and delivered 5 reusable Python/Snowflake stored-procedure frameworks for migrating historical enterprise data to Snowflake. Built Snowpark Python stored procedures with schema inference, validation layers, and structured error handling to flatten complex nested XML/JSON, and automated replication with Informatica IICS and HVR.",
+        },
+        {
+          label: "Warehouse Cost Optimisation",
+          detail: "Tuned SQL queries and implemented Snowflake clustering keys and auto-suspend/auto-resume warehouse policies, achieving a 40% reduction in compute credit consumption without degrading query performance.",
+        },
+        {
+          label: "Data Quality & Orchestration",
+          detail: "Implemented automated data quality checks (null detection, referential integrity, row-count reconciliation) and RCA frameworks. Orchestrated cross-platform workflows with Control-M and Airflow between on-prem legacy systems and Snowflake to guarantee T+1 data availability.",
         },
         {
           label: "GenAI & LLM Integration",
@@ -142,7 +169,7 @@ export const portfolioData = {
         },
         {
           label: "Strategic Problem Solving",
-          detail: "Collaborated with cross-functional stakeholders to translate vague business requirements into concrete technical implementations, delivering hotfixes and features in a fast-paced agile environment.",
+          detail: "Collaborated with cross-functional stakeholders to translate vague business requirements into concrete technical implementations, owning design documents and mentoring junior and mid-level engineers through structured code reviews.",
         },
       ],
     },
@@ -152,7 +179,7 @@ export const portfolioData = {
       roles: [
         { title: "Framework Engineer Intern", period: "Aug 2022 – Dec 2022" },
       ],
-      location: "Bangalore, India",
+      location: "Bengaluru, India",
       bullets: [
         {
           label: "Capstone Analytics Project",
@@ -186,9 +213,9 @@ export const portfolioData = {
       note: "for now"
     },
     working: {
-      title: "Backend Engineer",
-      company: "Quantiphi Analytics Pvt Ltd",
-      note: "serving notice — open to new opportunities"
+      title: "Senior Software Engineer 1",
+      company: "UsefulBI Corporation",
+      note: "onboarding onto the data platform — Databricks & AWS"
     }
   },
 

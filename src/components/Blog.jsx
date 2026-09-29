@@ -12,7 +12,7 @@ const item = {
 
 export function Blog({ articles }) {
   return (
-    <section id="blog" className="py-24 px-6 scroll-mt-24">
+    <section id="blog" className="py-16 sm:py-24 px-6">
       <div className="max-w-5xl mx-auto">
         <motion.p
           initial={{ opacity: 0, y: 10 }}

@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { useMotionValue, useSpring, useTransform, useReducedMotion } from 'framer-motion';
+import { useMotionValue, useSpring, useTransform, useMotionTemplate, useReducedMotion } from 'framer-motion';
 
 /**
  * Pointer-driven 3D tilt. Returns motion values to spread onto a
@@ -17,6 +17,8 @@ export function useTilt({ max = 8, glare = true } = {}) {
   const glareX = useTransform(px, [0, 1], ['0%', '100%']);
   const glareY = useTransform(py, [0, 1], ['0%', '100%']);
   const glareOpacity = useSpring(0, { stiffness: 300, damping: 30 });
+  // Must be a motion template — interpolating MotionValues into a plain string yields an invalid gradient.
+  const glareBackground = useMotionTemplate`radial-gradient(circle 180px at ${glareX} ${glareY}, rgba(255,255,255,0.22), transparent 100%)`;
 
   const onPointerMove = (e) => {
     if (reduceMotion || e.pointerType === 'touch') return;
@@ -35,7 +37,7 @@ export function useTilt({ max = 8, glare = true } = {}) {
   return {
     ref,
     style: reduceMotion ? {} : { rotateX, rotateY, transformPerspective: 800 },
-    glareStyle: { opacity: glareOpacity, background: `radial-gradient(circle 180px at ${glareX} ${glareY}, rgba(255,255,255,0.22), transparent 100%)` },
+    glareStyle: { opacity: glareOpacity, background: glareBackground },
     handlers: { onPointerMove, onPointerLeave },
   };
 }

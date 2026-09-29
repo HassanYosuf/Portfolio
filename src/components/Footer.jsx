@@ -14,7 +14,7 @@ const item = {
 
 export function Footer({ contact }) {
   return (
-    <footer id="contact" className="scroll-mt-24 mt-12 px-4 pb-4">
+    <footer id="contact" className="mt-12 px-4 pb-24 md:pb-4">
       <motion.div
         initial="hidden"
         whileInView="visible"
@@ -64,7 +64,7 @@ export function Footer({ contact }) {
             )}
           </motion.div>
 
-          <motion.div variants={item} className="mt-12 flex justify-center flex-wrap gap-6">
+          <motion.div variants={item} className="mt-12 flex justify-center flex-wrap gap-x-6 gap-y-3">
             {contact.links.map((link) => {
               const Icon = iconMap[link.title];
               return (

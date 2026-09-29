@@ -26,7 +26,7 @@ export function RightNow({ data }) {
   ];
 
   return (
-    <section id="status" className="py-24 px-6 scroll-mt-24">
+    <section id="status" className="py-16 sm:py-24 px-6">
       <div className="max-w-5xl mx-auto">
         <motion.p
           initial={{ opacity: 0, y: 10 }}
