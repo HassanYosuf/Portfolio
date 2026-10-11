@@ -116,6 +116,7 @@ export const portfolioData = {
       company: "Quantiphi Analytics Solution Pvt. Ltd.",
       roles: [
         { title: "Senior Data Engineer / Backend Engineer", period: "Jan 2026 – Sep 2026" },
+        { title: "Data Engineer / Backend Engineer", period: "Dec 2022 – Dec 2025" },
       ],
       location: "Bengaluru, India",
       bullets: [
